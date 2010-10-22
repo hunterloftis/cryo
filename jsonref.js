@@ -79,7 +79,7 @@
     });  
   }
   
-  window.jsonref = {
+  jsonref = {
     stringify: stringify,
     parse: parse
   }
