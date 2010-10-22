@@ -104,7 +104,7 @@ console.dir(test_object);
 console.log("\nJSON.stringified:");
 console.log(JSON.stringify(test_object));
 
-var str = jsref.stringify(test_object);
+var str = jsonref.stringify(test_object);
 
 console.log("\njsonref.stringified:");
 console.log(str);
