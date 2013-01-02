@@ -79,7 +79,7 @@
     });
   }
 
-  jsonref = {
+  Cryo = {
     stringify: stringify,
     parse: parse
   };
@@ -104,12 +104,12 @@ console.dir(test_object);
 console.log("\nJSON.stringified:");
 console.log(JSON.stringify(test_object));
 
-var str = jsonref.stringify(test_object);
+var str = Cryo.stringify(test_object);
 
-console.log("\njsonref.stringified:");
+console.log("\nCryo.stringified:");
 console.log(str);
 
-var parsed = jsonref.parse(str);
+var parsed = Cryo.parse(str);
 
-console.log("\njsonref.parse re-created object:");
+console.log("\nCryo.parse re-created object:");
 console.dir(parsed);
