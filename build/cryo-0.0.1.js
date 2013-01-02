@@ -13,10 +13,26 @@
     var jsref_objects = jsref.objects;
 
     function dereference(item) {
-      if (typeof(item) === "string") {
+      if (typeof item  === 'string') {
         if (item.slice(0, 15) === "_jsref_objects[") {
           var ref_index = item.slice(15, -1);
           return jsref_objects[ref_index];
+        }
+        if (item.slice(0, 15) === '_jsref_infinity') {
+          return Infinity;
+        }
+        if (item.slice(0, 16) === '_jsref_undefined') {
+          return undefined;
+        }
+        if (item.slice(0, 15) === '_jsref_function') {
+          var fn = item.slice(16);
+          var argStart = fn.indexOf('(') + 1;
+          var argEnd = fn.indexOf(')', argStart);
+          var args = fn.slice(argStart, argEnd);
+          var bodyStart = fn.indexOf('{') + 1;
+          var bodyEnd = fn.lastIndexOf('}') - 1;
+          var body = fn.slice(bodyStart, bodyEnd);
+          return new Function(args, body);
         }
       }
       return item;
@@ -38,8 +54,33 @@
   function stringify(object) {
     var jsref_objects = [];
 
+    store_objects(object);
+
+    // Clone each object in jsref_objects, replacing any object-type key with a reference to that object's index
+    // store the cloned "flat" reference objects in jsref_objects_reference
+    var jsref_objects_reference = new Array(jsref_objects.length),
+        i = jsref_objects.length;
+
+    while(i--) {
+      var isTheOne = false;
+      var obj = jsref_objects[i];
+      var obj_clone = (obj instanceof Array) ? [] : {};
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          if (typeof obj[key] === 'undefined') obj_clone[key] = '_jsref_undefined';
+          else obj_clone[key] = reference(obj[key]);
+        }
+      }
+      jsref_objects_reference[i] = obj_clone;
+    }
+
+    return JSON.stringify({
+      root: reference(object),
+      objects: jsref_objects_reference
+    });
+
     function store_objects(object) {
-      if (typeof(object) === "object") {
+      if (typeof object === 'object') {
         var jsref_index = jsref_objects.indexOf(object);
         if (jsref_objects.indexOf(object) === -1) {      // Obj hasn't been referenced before, so we need to store it
           jsref_objects.push(object);
@@ -52,31 +93,18 @@
         }
       }
     }
-    store_objects(object);
 
     function reference(item) {
-      return (typeof(item) === "object") ? "_jsref_objects[" + jsref_objects.indexOf(item) + "]" : item;
-    }
-
-    // Clone each object in jsref_objects, replacing any object-type key with a reference to that object's index
-    // store the cloned "flat" reference objects in jsref_objects_reference
-    var jsref_objects_reference = new Array(jsref_objects.length),
-        i = jsref_objects.length;
-    while(i--) {
-      var obj = jsref_objects[i];
-      var obj_clone = (obj instanceof Array) ? [] : {};
-      for (var key in obj) {
-        if (obj.hasOwnProperty(key)) {
-          obj_clone[key] = reference(obj[key]);
-        }
+      if (typeof item === "object") {
+        if (item === null) return null;
+        return "_jsref_objects[" + jsref_objects.indexOf(item) + "]";
       }
-      jsref_objects_reference[i] = obj_clone;
+      if (item === Infinity) return '_jsref_infinity';
+      if (typeof item === 'function') {
+        return '_jsref_function' + item.toString();
+      }
+      return item;
     }
-
-    return JSON.stringify({
-      root: reference(object),
-      objects: jsref_objects_reference
-    });
   }
 
   // Exported object
@@ -106,32 +134,3 @@
   }
 
 })();
-
-/*
-var stuff = {whatever: "Goes here"};
-var other_stuff = {pointer_to: stuff};
-var test_object = {
-  objects: stuff,
-  references: other_stuff,
-  array: [0, 1, 2, other_stuff, 4],
-  func: function() {
-    console.log("What happens with a function?");
-  }
-};
-
-console.log("\noriginal object:");
-console.dir(test_object);
-
-console.log("\nJSON.stringified:");
-console.log(JSON.stringify(test_object));
-
-var str = Cryo.stringify(test_object);
-
-console.log("\nCryo.stringified:");
-console.log(str);
-
-var parsed = Cryo.parse(str);
-
-console.log("\nCryo.parse re-created object:");
-console.dir(parsed);
-*/
