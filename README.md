@@ -1,6 +1,9 @@
 # Cryo
 
-Easily store/serialize/pickle and re-hydrate complex JavaScript objects (including Functions)
+Easily store/serialize/pickle and re-hydrate complex JavaScript objects, including:
+- Functions
+- undefined properties
+- nested Object references
 
 Something like extended JSON or limited Pickle.
 
