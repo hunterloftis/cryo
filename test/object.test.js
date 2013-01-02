@@ -88,4 +88,25 @@ describe('Object', function() {
     assert.deepEqual(hydrated, original);
   });
 
+  it('should hydrate an object with nested objects', function() {
+    var original = {
+      first: {
+        second: {
+          myString: 'my string',
+          myNum: 128,
+          myArray: ['a', 2, 3, 'd', false, true],
+          myBool: false,
+          myNull: null,
+          myUndefined: undefined
+        },
+        secondSibling: [1, 2, 3],
+        thirdSibling: undefined
+      },
+      firstSibling: 'hello'
+    };
+    var stringified = Cryo.stringify(original);
+    var hydrated = Cryo.parse(stringified);
+
+    assert.deepEqual(hydrated, original);
+  });
 });
