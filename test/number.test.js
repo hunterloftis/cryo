@@ -29,4 +29,20 @@ describe('Number', function() {
     assert.deepEqual(hydrated, original);
   });
 
+  it('should hydrate a negative number', function() {
+    var original = -999;
+    var stringified = Cryo.stringify(original);
+    var hydrated = Cryo.parse(stringified);
+
+    assert.deepEqual(hydrated, original);
+  });
+
+  it('should hydrate a decimal', function() {
+    var original = 333/444 + 0.00005;
+    var stringified = Cryo.stringify(original);
+    var hydrated = Cryo.parse(stringified);
+
+    assert.deepEqual(hydrated, original);
+  });
+
 });
