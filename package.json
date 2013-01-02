@@ -1,0 +1,26 @@
+{
+  "name": "cryo",
+  "version": "0.0.1",
+  "description": "Easily pickle/serialize/freeze/store and re-hydrate complex JavaScript objects (including Functions)",
+  "keywords": [
+    "pickle",
+    "serialize",
+    "store",
+    "hydrate",
+    "freeze",
+    "json"
+  ],
+  "author": "Hunter Loftis <hunter@hunterloftis.com>",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:hunterloftis/cryo.git"
+  },
+  "main": "./lib/cryo.js",
+  "engines": {
+    "node": ">= 0.4.x"
+  },
+  "dependencies": {
+    "mocha": "~1.7.4",
+    "chai": "~1.4.2"
+  }
+}

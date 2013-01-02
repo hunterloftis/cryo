@@ -79,14 +79,35 @@
     });
   }
 
+  // Exported object
   Cryo = {
     stringify: stringify,
     parse: parse
   };
 
+  // global on server, window in browser
+  var root = this;
+
+  // AMD / RequireJS
+  if (typeof define !== 'undefined' && define.amd) {
+    define('Cryo', [], function () {
+      return Cryo;
+    });
+  }
+
+  // node.js
+  else if (typeof module !== 'undefined' && module.exports) {
+    module.exports = Cryo;
+  }
+
+  // included directly via <script> tag
+  else {
+    root.Cryo = Cryo;
+  }
+
 })();
 
-
+/*
 var stuff = {whatever: "Goes here"};
 var other_stuff = {pointer_to: stuff};
 var test_object = {
@@ -113,3 +134,4 @@ var parsed = Cryo.parse(str);
 
 console.log("\nCryo.parse re-created object:");
 console.dir(parsed);
+*/
