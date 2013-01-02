@@ -5,16 +5,23 @@ var Cryo = require('../lib/cryo');
 
 describe('String', function() {
 
-  before(function() {
-    this.original = [
+  it('should hydrate a simple string', function() {
+    var original = [
       "This is my simple string. Isn't it beautiful!?",
       "Here is a mustache: {{"
     ].join('\n');
-    this.stringified = Cryo.stringify(this.original);
+    var stringified = Cryo.stringify(original);
+    var hydrated = Cryo.parse(stringified);
+
+    assert.deepEqual(hydrated, original);
   });
 
-  it('should hydrate a simple string', function() {
-    var hydrated = Cryo.parse(this.stringified);
-    assert.strictEqual(hydrated, this.original);
+  it('should hydrate an empty string', function() {
+    var original = '';
+    var stringified = Cryo.stringify(original);
+    var hydrated = Cryo.parse(stringified);
+
+    assert.deepEqual(hydrated, original);
   });
+
 });
