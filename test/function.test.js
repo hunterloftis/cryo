@@ -1,0 +1,20 @@
+var mocha = require('mocha');
+var assert = require('chai').assert;
+
+var Cryo = require('../lib/cryo');
+
+describe('Function', function() {
+
+  it('should hydrate a function', function() {
+    var original = function(from, to) {
+      return 'hello world from ' + from + ' to ' + to;
+    };
+    var stringified = Cryo.stringify(original);
+    var hydrated = Cryo.parse(stringified);
+
+    var result1 = original('Hunter', 'you');
+    var result2 = hydrated('Hunter', 'you');
+    assert.deepEqual(result1, result2);
+  });
+
+});
