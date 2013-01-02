@@ -17,4 +17,22 @@ describe('Function', function() {
     assert.deepEqual(result1, result2);
   });
 
+  // TODO: major implementation changes to get this to work
+
+  /*
+  it('should hydrate a function that has properties', function() {
+    var original = function(from, to) {
+      return 'hello world from ' + from + ' to ' + to;
+    };
+    original.attached = 'some property';
+    var stringified = Cryo.stringify(original);
+    var hydrated = Cryo.parse(stringified);
+
+    var result1 = original('Hunter', 'you');
+    var result2 = hydrated('Hunter', 'you');
+    assert.deepEqual(result1, result2);
+    assert.deepEqual(original, hydrated);
+  });
+  */
+
 });
