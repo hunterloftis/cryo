@@ -1,8 +1,16 @@
 # Cryo
 
+Easily store/serialize/pickle and re-hydrate complex JavaScript objects (including Functions)
+
+Something like extended JSON or limited Pickle.
+
+## Installation
+
 ```
 $ npm install cryo
 ```
+
+## Example
 
 ```js
 var Cryo = require('cryo');
