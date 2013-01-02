@@ -13,4 +13,13 @@ describe('Null and undefined', function() {
     assert.deepEqual(hydrated, original);
   });
 
+  it('should hydrate an undefined value', function() {
+    var original;
+    var stringified = Cryo.stringify(original);
+    var hydrated = Cryo.parse(stringified);
+
+    assert.isUndefined(original);
+    assert.deepEqual(hydrated, original);
+  });
+
 });
