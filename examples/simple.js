@@ -1,4 +1,4 @@
-var Cryo = require('cryo');
+var Cryo = require('../lib/cryo');
 
 var obj = {
   name: 'Hunter',
