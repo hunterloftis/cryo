@@ -27,3 +27,12 @@ var hydrated = Cryo.parse(frozen);
 
 hydrated.hello(); // Hunter says hello!
 ```
+
+## Tests
+
+```
+$ git clone git://github.com/hunterloftis/cryo.git
+$ cd cryo
+$ make setup
+$ make test
+```
