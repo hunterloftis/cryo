@@ -7,21 +7,12 @@ setup:
 	npm install
 
 test:
-	node_modules/.bin/mocha -R spec --bail
+	node_modules/.bin/mocha -R spec --bail ./test/*.test.js
 
 build:
 	@echo "Development: $(DEV)"
 	@echo "Production: $(PROD)"
 
 	@cat $(SRC) > $(DEV)
-
-	@echo "Building with closure compiler..."
-	@curl -s \
-		-d compilation_level=WHITESPACE_ONLY \
-		-d output_format=text \
-		-d output_info=compiled_code \
-		--data-urlencode "js_code@${DEV}" \
-		http://closure-compiler.appspot.com/compile \
-		> $(PROD)
 
 .PHONY: setup test build
