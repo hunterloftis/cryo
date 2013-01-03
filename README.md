@@ -2,8 +2,10 @@
 
 Easily store/serialize/pickle and re-hydrate complex JavaScript objects, including:
 - Functions
-- undefined properties
-- nested Object references
+- Undefined
+- Dates
+- Nested references
+- Infinity
 
 Something like extended JSON or limited Pickle.
 
