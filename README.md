@@ -6,7 +6,6 @@ Easily store/serialize/pickle and re-hydrate complex JavaScript objects, includi
 - [Dates](https://github.com/hunterloftis/cryo/blob/master/test/date.test.js)
 - [Nested references](https://github.com/hunterloftis/cryo/blob/master/test/complex.test.js)
 - [Infinity](https://github.com/hunterloftis/cryo/blob/master/test/number.test.js)
-- ... as well as everything already supported by JSON
 
 Something like extended JSON or limited Pickle.
 
