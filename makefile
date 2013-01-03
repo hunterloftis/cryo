@@ -1,7 +1,6 @@
 VERSION=0.0.3
 SRC=lib/cryo.js
 DEV=build/cryo-$(VERSION).js
-PROD=build/cryo-$(VERSION).min.js
 
 setup:
 	npm install
@@ -11,7 +10,6 @@ test:
 
 build:
 	@echo "Development: $(DEV)"
-	@echo "Production: $(PROD)"
 
 	@cat $(SRC) > $(DEV)
 
