@@ -1,7 +1,8 @@
 # Cryo
 
-Easily store/serialize/pickle/freeze and re-hydrate complex JavaScript objects in node or in the browser.
-Handles:
+Easily freeze and re-hydrate complex JavaScript objects.
+
+Built for node.js and browsers. Handles:
 
 - [Functions](https://github.com/hunterloftis/cryo/blob/master/test/function.test.js)
 - [Undefined](https://github.com/hunterloftis/cryo/blob/master/test/null.test.js)
