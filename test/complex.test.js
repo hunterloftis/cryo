@@ -41,17 +41,16 @@ describe('Complex', function() {
     assert.strictEqual(test.subject.title, hydrated.subject.title);
   });
 
-  it('should dereference objects that were originally the same into a single hydrated object', function() {
-    var user = [{ name: 'Hunter' }, { name: 'Abe' }, { name: 'Bob' }];
+  it('should dereference objects that were originall the same into the same after hydration', function() {
+    var userList = [{ name: 'Abe' }, { name: 'Bob' }, { name: 'Carl' }];
     var state = {
-      sortedUsers: [user[1], user[0], user[2]], // Abe, Hunter, Bob
-      activeUser: user[1] // Abe
+      users: userList,
+      activeUser: userList[1]
     };
     var stringified = Cryo.stringify(state);
     var hydrated = Cryo.parse(stringified);
 
-    assert.deepEqual(hydrated, state);
-    assert.strictEqual(hydrated.activeUser, hydrated.sortedUsers[0]);
+    assert.strictEqual(hydrated.activeUser, hydrated.users[1]);
   });
 
   it('should be able to hydrate itself', function() {

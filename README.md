@@ -2,7 +2,7 @@
 
 Easily serialize and deserialize JavaScript objects.
 
-Built for node.js and browsers. Cryo is inspired by Python's Pickle, and works similarly to JSON.stringify() and JSON.parse().
+Built for node.js and browsers. Cryo is inspired by Python's pickle and works similarly to JSON.stringify() and JSON.parse().
 Cryo.stringify() and Cryo.parse() handle these additional circumstances:
 
 - [Undefined](#undefined)
@@ -10,6 +10,7 @@ Cryo.stringify() and Cryo.parse() handle these additional circumstances:
 - [Infinity](#infinity)
 - [Object references](#references)
 - [Functions](#functions)
+- [Attached properties](#properties)
 
 ## Installation
 
@@ -49,13 +50,41 @@ hydrated.hello(); // Hunter says hello!
 
 ### Undefined
 
+`JSON.stringify()` doesn't store undefined values.
+This is frequently desired behavior, but Cryo's goal is to capture a verbatim snapshot of the target object.
+Undefined keys are still keys that exist in a container, so Cryo restores them to undefined values in `parse()`.
+
 - [Undefined tests](https://github.com/hunterloftis/cryo/blob/master/test/null.test.js)
 
 ### Date
 
+`JSON.stringify()` converts Date objects to strings.
+Cryo maintains Date objects so the parsed value is identical to the stringified value.
+
 - [Date tests](https://github.com/hunterloftis/cryo/blob/master/test/date.test.js)
 
 ### References
+
+JSON.stringify() replaces Object references with clones of data.
+When several references to the same object are stringified, those references will becomes separate clones of the object's data on JSON.parse().
+Cryo maintains object references so the restored objects are identical to the stringified objects.
+For example:
+
+```js
+var Cryo = require('../lib/cryo');
+
+var userList = [{ name: 'Abe' }, { name: 'Bob' }, { name: 'Carl' }];
+var state = {
+  users: userList,
+  activeUser: userList[1]
+};
+
+var withJSON = JSON.parse(JSON.stringify(state));
+console.log(withJSON.activeUser === withJSON.users[1]);   // false
+
+var withCryo = Cryo.parse(Cryo.stringify(state));
+console.log(withCryo.activeUser === withCryo.users[1]);   // true
+```
 
 - [Object reference tests](https://github.com/hunterloftis/cryo/blob/master/test/complex.test.js)
 
@@ -66,6 +95,10 @@ hydrated.hello(); // Hunter says hello!
 ### Functions
 
 - [Function tests](https://github.com/hunterloftis/cryo/blob/master/test/function.test.js)
+
+### Properties
+
+
 
 ## Tests
 
