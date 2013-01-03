@@ -3,7 +3,7 @@
 Easily serialize and deserialize JavaScript objects.
 
 Built for node.js and browsers. Cryo is inspired by Python's pickle and works similarly to JSON.stringify() and JSON.parse().
-Cryo.stringify() and Cryo.parse() handle these additional circumstances:
+Cryo.stringify() and Cryo.parse() improve on JSON in these circumstances:
 
 - [Undefined](#undefined)
 - [Date](#date)
@@ -107,7 +107,7 @@ console.log(withCryo.activeUser === withCryo.users[1]);   // true
 
 ### Infinity
 
-Cry successfully stringifies and parses `Infinity`, which JSON mangles into `null`.
+Cryo successfully stringifies and parses `Infinity`, which JSON mangles into `null`.
 
 ```js
 var Cryo = require('../lib/cryo');
@@ -121,9 +121,31 @@ var withCryo = Cryo.parse(Cryo.stringify(number));
 console.log(withCryo === Infinity);                 // true
 ```
 
-### Functions
-
 ### Properties
+
+Objects, Arrays, Dates, and Functions can all hold properties, but JSON will only stringify properties on Objects.
+Cryo will recover properties from all containers:
+
+```js
+var Cryo = require('../lib/cryo');
+
+function first() {}
+first.second = new Date();
+first.second.third = [1, 2, 3];
+first.second.third.fourth = { name: 'Hunter' };
+
+try {
+  var withJSON = JSON.parse(JSON.stringify(first));
+  console.log(withJSON.second.third.fourth.name === 'Hunter');
+} catch(e) {
+  console.log('error');                                       // error
+}
+
+var withCryo = Cryo.parse(Cryo.stringify(first));
+console.log(withCryo.second.third.fourth.name === 'Hunter');  // true
+```
+
+### Functions
 
 
 
