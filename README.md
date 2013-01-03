@@ -157,17 +157,19 @@ Cryo will make faithful hydrated functions and objects with properties that are 
 ```js
 var Cryo = require('../lib/cryo');
 
-function fn() {}
+function fn() {
+  console.log('Hello, world!');
+}
 
 try {
   var withJSON = JSON.parse(JSON.stringify(fn));
-  console.log(typeof withJSON === 'function');
+  withJSON();
 } catch(e) {
   console.log('error');                             // error
 }
 
 var withCryo = Cryo.parse(Cryo.stringify(fn));
-console.log(typeof withCryo === 'function');        // true
+withCryo();                                         // Hello, world!
 ```
 
 ## Tests
