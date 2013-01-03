@@ -1,6 +1,8 @@
 # Cryo
 
-Easily store/serialize/pickle and re-hydrate complex JavaScript objects, including:
+Easily store/serialize/pickle/freeze and re-hydrate complex JavaScript objects in node or in the browser.
+Handles:
+
 - [Functions](https://github.com/hunterloftis/cryo/blob/master/test/function.test.js)
 - [Undefined](https://github.com/hunterloftis/cryo/blob/master/test/null.test.js)
 - [Dates](https://github.com/hunterloftis/cryo/blob/master/test/date.test.js)
@@ -11,8 +13,18 @@ Something like extended JSON or limited Pickle.
 
 ## Installation
 
+### node.js
+
 ```
 $ npm install cryo
+```
+
+### browser
+
+Add the [latest minified build](https://github.com/hunterloftis/cryo/tree/master/build) to your project as a script:
+
+```html
+<script type='text/javascript' src='cryo-0.0.2.min.js'></script>
 ```
 
 ## Example
