@@ -35,15 +35,16 @@ var Cryo = require('cryo');
 
 var obj = {
   name: 'Hunter',
+  created: new Date(),
   hello: function() {
-    console.log(this.name + ' says hello!');
+    console.log(this.name + ' said hello in ' + this.created.getFullYear() + '!');
   }
 };
 
 var frozen = Cryo.stringify(obj);
 var hydrated = Cryo.parse(frozen);
 
-hydrated.hello(); // Hunter says hello!
+hydrated.hello(); // Hunter says hello in 2013!
 ```
 
 ## More powerful JSON
@@ -147,7 +148,27 @@ console.log(withCryo.second.third.fourth.name === 'Hunter');  // true
 
 ### Functions
 
+Cryo will stringify functions, which JSON ignores.
 
+**Note:** Usually, if you've come up with a solution that needs to serialize functions, a better solution exists that doesn't.
+However, sometimes this can be enormously useful.
+Cryo will make faithful hydrated functions and objects with properties that are functions.
+
+```js
+var Cryo = require('../lib/cryo');
+
+function fn() {}
+
+try {
+  var withJSON = JSON.parse(JSON.stringify(fn));
+  console.log(typeof withJSON === 'function');
+} catch(e) {
+  console.log('error');                             // error
+}
+
+var withCryo = Cryo.parse(Cryo.stringify(fn));
+console.log(typeof withCryo === 'function');        // true
+```
 
 ## Tests
 
