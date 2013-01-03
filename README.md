@@ -45,7 +45,7 @@ var hydrated = Cryo.parse(frozen);
 hydrated.hello(); // Hunter says hello!
 ```
 
-## A more powerful JSON.stringify() and JSON.parse()
+## More powerful JSON
 
 ### Undefined
 
