@@ -107,8 +107,19 @@ console.log(withCryo.activeUser === withCryo.users[1]);   // true
 
 ### Infinity
 
-`JSON.stringify(Infinity)` returns `null`, even though `Infinity` is a numeric type in JavaScript.
-Cryo successfully stringifies and parses `Infinity` as a `Number`.
+Cry successfully stringifies and parses `Infinity`, which JSON mangles into `null`.
+
+```js
+var Cryo = require('../lib/cryo');
+
+var number = Infinity;
+
+var withJSON = JSON.parse(JSON.stringify(number));
+console.log(withJSON === Infinity);                 // false
+
+var withCryo = Cryo.parse(Cryo.stringify(number));
+console.log(withCryo === Infinity);                 // true
+```
 
 ### Functions
 
