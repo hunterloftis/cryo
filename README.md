@@ -1,6 +1,6 @@
 # Cryo
 
-Easily serialize and deserialize JavaScript objects.
+JSON on steroids.
 
 Built for node.js and browsers. Cryo is inspired by Python's pickle and works similarly to JSON.stringify() and JSON.parse().
 Cryo.stringify() and Cryo.parse() improve on JSON in these circumstances:
