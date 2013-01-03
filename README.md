@@ -50,23 +50,23 @@ hydrated.hello(); // Hunter says hello!
 
 ### Undefined
 
-`JSON.stringify()` loses undefined values.
-Cryo keeps them, since its goal is a verbatim snapshot of your object and all of its properties.
+`JSON.stringify()` loses properties that are `undefined`.
+Cryo takes a verbatim snapshot of all your properties, including those that are `undefined`.
 
 - [Undefined tests](https://github.com/hunterloftis/cryo/blob/master/test/null.test.js)
 
 ### Date
 
-`JSON.stringify()` loses Date objects, converting them to strings.
-Cryo maintains Date objects as Date objects and restores them in `Cryo.parse()`.
+`JSON.stringify()` loses `Date` objects, converting them to strings.
+Cryo maintains `Date` types.
 
 - [Date tests](https://github.com/hunterloftis/cryo/blob/master/test/date.test.js)
 
 ### References
 
 `JSON.stringify()` makes multiple copies of single objects, losing object relationships.
-When several references to the same object are JSON stringified, those references are turned into clones of each other.
-Cryo maintains object references so the restored objects are identical to the stringified objects.
+When several references to the same object are stringified with JSON, those references are turned into clones of each other.
+Cryo maintains object references so the restored objects are identical to the originals.
 This is easier to understand with an example:
 
 ```js
