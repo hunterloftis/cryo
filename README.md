@@ -9,8 +9,8 @@ Cryo.stringify() and Cryo.parse() improve on JSON in these circumstances:
 - [Date](#date)
 - [Infinity](#infinity)
 - [Object references](#references)
-- [Functions](#functions)
 - [Attached properties](#properties)
+- [Functions](#functions)
 
 ## Installation
 
