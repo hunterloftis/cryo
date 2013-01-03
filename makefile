@@ -17,7 +17,7 @@ build:
 
 	@echo "Building with closure compiler..."
 	@curl -s \
-		-d compilation_level=SIMPLE_OPTIMIZATIONS \
+		-d compilation_level=WHITESPACE_ONLY \
 		-d output_format=text \
 		-d output_info=compiled_code \
 		--data-urlencode "js_code@${DEV}" \

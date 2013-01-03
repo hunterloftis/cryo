@@ -71,16 +71,20 @@
     return rebuildFromReferences(json.root, json.references);
   }
 
-  function rebuildFromReferences(item, references) {
+  function rebuildFromReferences(item, references, restoredItems) {
+    restoredItems = restoredItems || [];
     if (starts(item, REFERENCE_FLAG)) {
       var referenceIndex = parseInt(item.slice(REFERENCE_FLAG.length), 10);
-      var ref = references[referenceIndex];
-      var container = unwrap(ref.value);
-      var contents = ref.contents;
-      for (var key in contents) {
-        container[key] = rebuildFromReferences(contents[key], references);
+      if (!restoredItems.hasOwnProperty(referenceIndex)) {
+        var ref = references[referenceIndex];
+        var container = unwrap(ref.value);
+        var contents = ref.contents;
+        for (var key in contents) {
+          container[key] = rebuildFromReferences(contents[key], references, restoredItems);
+        }
+        restoredItems[referenceIndex] = container;
       }
-      return container;
+      return restoredItems[referenceIndex];
     }
     return unwrap(item);
   }
