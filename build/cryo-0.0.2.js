@@ -73,10 +73,8 @@
 
   function parse(string) {
     var json = JSON.parse(string);
-    var root = json.root;
-    var references = json.references;
 
-    return rebuildFromReferences(root, references);
+    return rebuildFromReferences(json.root, json.references);
   }
 
   function rebuildFromReferences(item, references) {
