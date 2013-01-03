@@ -57,8 +57,19 @@ Cryo takes a verbatim snapshot of all your properties, including those that are 
 
 ### Date
 
-`JSON.stringify()` loses `Date` objects, converting them to strings.
-Cryo maintains `Date` types.
+Cryo successfully works with `Date` objects, which `JSON.stringify()` mangles into strings.
+
+```js
+var Cryo = require('../lib/cryo');
+
+var now = new Date();
+
+var withJSON = JSON.parse(JSON.stringify(now));
+console.log(withJSON instanceof Date);              // false
+
+var withCryo = Cryo.parse(Cryo.stringify(now));
+console.log(withCryo instanceof Date);              // true
+```
 
 - [Date tests](https://github.com/hunterloftis/cryo/blob/master/test/date.test.js)
 
