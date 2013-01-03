@@ -25,7 +25,7 @@ $ npm install cryo
 Add the [latest minified build](https://github.com/hunterloftis/cryo/tree/master/build) to your project as a script:
 
 ```html
-<script type='text/javascript' src='cryo-0.0.3.min.js'></script>
+<script type='text/javascript' src='cryo-0.0.3.js'></script>
 ```
 
 ## Example
