@@ -28,7 +28,12 @@ Add the [latest minified build](https://github.com/hunterloftis/cryo/tree/master
 <script type='text/javascript' src='cryo-0.0.4.js'></script>
 ```
 
-## Example
+## Use
+
+Cryo has a very simple API that mimicks JSON:
+
+- `Cryo.stringify(item)`
+- `Cryo.parse(string)`
 
 ```js
 var Cryo = require('cryo');
@@ -44,7 +49,7 @@ var obj = {
 var frozen = Cryo.stringify(obj);
 var hydrated = Cryo.parse(frozen);
 
-hydrated.hello(); // Hunter says hello in 2013!
+hydrated.hello(); // Hunter said hello in 2013!
 ```
 
 ## More powerful JSON
