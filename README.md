@@ -1,11 +1,12 @@
 # Cryo
 
 Easily store/serialize/pickle and re-hydrate complex JavaScript objects, including:
-- Functions
-- Undefined
-- Dates
-- Nested references
-- Infinity
+- [Functions](https://github.com/hunterloftis/cryo/blob/master/test/function.test.js)
+- [Undefined](https://github.com/hunterloftis/cryo/blob/master/test/null.test.js)
+- [Dates](https://github.com/hunterloftis/cryo/blob/master/test/date.test.js)
+- [Nested references](https://github.com/hunterloftis/cryo/blob/master/test/complex.test.js)
+- [Infinity](https://github.com/hunterloftis/cryo/blob/master/test/number.test.js)
+- ... as well as everything already supported by JSON
 
 Something like extended JSON or limited Pickle.
 
@@ -34,6 +35,8 @@ hydrated.hello(); // Hunter says hello!
 ```
 
 ## Tests
+
+Tests require node.js.
 
 ```
 $ git clone git://github.com/hunterloftis/cryo.git
