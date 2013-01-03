@@ -1,14 +1,15 @@
 # Cryo
 
-Easily freeze and re-hydrate complex JavaScript objects.
+Easily serialize and deserialize JavaScript objects.
 
-Built for node.js and browsers. Cryo is inspired by Python's Pickle, extending JSON to handle:
+Built for node.js and browsers. Cryo is inspired by Python's Pickle, and works similarly to JSON.stringify() and JSON.parse().
+Cryo.stringify() and Cryo.parse() handle these additional circumstances:
 
-- [Functions](https://github.com/hunterloftis/cryo/blob/master/test/function.test.js)
-- [Undefined](https://github.com/hunterloftis/cryo/blob/master/test/null.test.js)
-- [Dates](https://github.com/hunterloftis/cryo/blob/master/test/date.test.js)
-- [Nested references](https://github.com/hunterloftis/cryo/blob/master/test/complex.test.js)
-- [Infinity](https://github.com/hunterloftis/cryo/blob/master/test/number.test.js)
+- [Undefined](#undefined)
+- [Date](#date)
+- [Infinity](#infinity)
+- [Object references](#references)
+- [Functions](#functions)
 
 ## Installation
 
@@ -43,6 +44,28 @@ var hydrated = Cryo.parse(frozen);
 
 hydrated.hello(); // Hunter says hello!
 ```
+
+## A more powerful JSON.stringify() and JSON.parse()
+
+### Undefined
+
+- [Undefined tests](https://github.com/hunterloftis/cryo/blob/master/test/null.test.js)
+
+### Date
+
+- [Date tests](https://github.com/hunterloftis/cryo/blob/master/test/date.test.js)
+
+### References
+
+- [Object reference tests](https://github.com/hunterloftis/cryo/blob/master/test/complex.test.js)
+
+### Infinity
+
+- [Infinity tests](https://github.com/hunterloftis/cryo/blob/master/test/number.test.js)
+
+### Functions
+
+- [Function tests](https://github.com/hunterloftis/cryo/blob/master/test/function.test.js)
 
 ## Tests
 
