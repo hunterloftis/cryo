@@ -53,8 +53,6 @@ hydrated.hello(); // Hunter says hello!
 `JSON.stringify()` loses properties that are `undefined`.
 Cryo takes a verbatim snapshot of all your properties, including those that are `undefined`.
 
-- [Undefined tests](https://github.com/hunterloftis/cryo/blob/master/test/null.test.js)
-
 ### Date
 
 Cryo successfully works with `Date` objects, which `JSON.stringify()` mangles into strings.
@@ -70,8 +68,6 @@ console.log(withJSON instanceof Date);              // false
 var withCryo = Cryo.parse(Cryo.stringify(now));
 console.log(withCryo instanceof Date);              // true
 ```
-
-- [Date tests](https://github.com/hunterloftis/cryo/blob/master/test/date.test.js)
 
 ### References
 
@@ -96,18 +92,12 @@ var withCryo = Cryo.parse(Cryo.stringify(state));
 console.log(withCryo.activeUser === withCryo.users[1]);   // true
 ```
 
-- [Object reference tests](https://github.com/hunterloftis/cryo/blob/master/test/complex.test.js)
-
 ### Infinity
 
 `JSON.stringify(Infinity)` returns `null`, even though `Infinity` is a numeric type in JavaScript.
 Cryo successfully stringifies and parses `Infinity` as a `Number`.
 
-- [Infinity tests](https://github.com/hunterloftis/cryo/blob/master/test/number.test.js)
-
 ### Functions
-
-- [Function tests](https://github.com/hunterloftis/cryo/blob/master/test/function.test.js)
 
 ### Properties
 
