@@ -54,4 +54,11 @@ describe('Complex', function() {
     assert.strictEqual(hydrated.activeUser, hydrated.sortedUsers[0]);
   });
 
+  it('should be able to hydrate itself', function() {
+    var stringified = Cryo.stringify(Cryo);
+    var hydrated = Cryo.parse(stringified);
+
+    assert.isFunction(hydrated.parse);
+    assert.isFunction(hydrated.stringify);
+  });
 });
