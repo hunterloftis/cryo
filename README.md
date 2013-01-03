@@ -25,7 +25,7 @@ $ npm install cryo
 Add the [latest minified build](https://github.com/hunterloftis/cryo/tree/master/build) to your project as a script:
 
 ```html
-<script type='text/javascript' src='cryo-0.0.2.min.js'></script>
+<script type='text/javascript' src='cryo-0.0.3.min.js'></script>
 ```
 
 ## Example
@@ -50,25 +50,24 @@ hydrated.hello(); // Hunter says hello!
 
 ### Undefined
 
-`JSON.stringify()` doesn't store undefined values.
-This is frequently desired behavior, but Cryo's goal is to capture a verbatim snapshot of the target object.
-Undefined keys are still keys that exist in a container, so Cryo restores them to undefined values in `parse()`.
+`JSON.stringify()` loses undefined values.
+Cryo keeps them, since its goal is a verbatim snapshot of your object and all of its properties.
 
 - [Undefined tests](https://github.com/hunterloftis/cryo/blob/master/test/null.test.js)
 
 ### Date
 
-`JSON.stringify()` converts Date objects to strings.
-Cryo maintains Date objects so the parsed value is identical to the stringified value.
+`JSON.stringify()` loses Date objects, converting them to strings.
+Cryo maintains Date objects as Date objects and restores them in `Cryo.parse()`.
 
 - [Date tests](https://github.com/hunterloftis/cryo/blob/master/test/date.test.js)
 
 ### References
 
-JSON.stringify() replaces Object references with clones of data.
-When several references to the same object are stringified, those references will becomes separate clones of the object's data on JSON.parse().
+`JSON.stringify()` makes multiple copies of single objects, losing object relationships.
+When several references to the same object are JSON stringified, those references are turned into clones of each other.
 Cryo maintains object references so the restored objects are identical to the stringified objects.
-For example:
+This is easier to understand with an example:
 
 ```js
 var Cryo = require('../lib/cryo');
@@ -89,6 +88,9 @@ console.log(withCryo.activeUser === withCryo.users[1]);   // true
 - [Object reference tests](https://github.com/hunterloftis/cryo/blob/master/test/complex.test.js)
 
 ### Infinity
+
+`JSON.stringify(Infinity)` returns `null`, even though `Infinity` is a numeric type in JavaScript.
+Cryo successfully stringifies and parses `Infinity` as a `Number`.
 
 - [Infinity tests](https://github.com/hunterloftis/cryo/blob/master/test/number.test.js)
 
