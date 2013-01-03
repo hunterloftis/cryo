@@ -2,15 +2,13 @@
 
 Easily freeze and re-hydrate complex JavaScript objects.
 
-Built for node.js and browsers. Handles:
+Built for node.js and browsers. Cryo is inspired by Python's Pickle, extending JSON to handle:
 
 - [Functions](https://github.com/hunterloftis/cryo/blob/master/test/function.test.js)
 - [Undefined](https://github.com/hunterloftis/cryo/blob/master/test/null.test.js)
 - [Dates](https://github.com/hunterloftis/cryo/blob/master/test/date.test.js)
 - [Nested references](https://github.com/hunterloftis/cryo/blob/master/test/complex.test.js)
 - [Infinity](https://github.com/hunterloftis/cryo/blob/master/test/number.test.js)
-
-Something like extended JSON or limited Pickle.
 
 ## Installation
 
