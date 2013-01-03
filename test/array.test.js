@@ -25,4 +25,13 @@ describe('Array', function() {
     assert.deepEqual(hydrated, original);
   });
 
+  it('should hydrate an array that has properties', function() {
+    var original = [1, 2, 3];
+    original.attached = 'some property';
+    var stringified = Cryo.stringify(original);
+    var hydrated = Cryo.parse(stringified);
+
+    assert.deepEqual(hydrated, original);
+  });
+
 });
