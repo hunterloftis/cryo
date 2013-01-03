@@ -50,8 +50,21 @@ hydrated.hello(); // Hunter says hello!
 
 ### Undefined
 
-`JSON.stringify()` loses properties that are `undefined`.
-Cryo takes a verbatim snapshot of all your properties, including those that are `undefined`.
+Cryo takes a verbatim snapshot of all your properties, including those that are `undefined` - which JSON ignores.
+
+```js
+var Cryo = require('../lib/cryo');
+
+var obj = {
+  defaultValue: undefined
+};
+
+var withJSON = JSON.parse(JSON.stringify(obj));
+console.log(withJSON.hasOwnProperty('defaultValue'));   // false
+
+var withCryo = Cryo.parse(Cryo.stringify(obj));
+console.log(withCryo.hasOwnProperty('defaultValue'));   // true
+```
 
 ### Date
 
