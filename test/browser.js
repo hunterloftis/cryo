@@ -44,4 +44,18 @@ describe('Cryo - Browser', function() {
     assert.strictEqual(test.subject.title, hydrated.subject.title);
   });
 
+  it('should ignore DOM references', function() {
+    var ref = document.getElementById('ref-test');
+    var test = {
+      domRef: ref,
+      otherData: 'Hello'
+    };
+
+    var stringified = Cryo.stringify(test);
+    var hydrated = Cryo.parse(stringified);
+
+    assert.ok(ref);
+    assert.strictEqual(hydrated.otherData, test.otherData);
+  });
+
 });

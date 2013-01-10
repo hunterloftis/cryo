@@ -7,6 +7,7 @@ setup:
 
 test:
 	node_modules/.bin/mocha -R spec --bail ./test/*.test.js
+	open test/browser.html
 
 build:
 	@echo "Development: $(DEV)"
