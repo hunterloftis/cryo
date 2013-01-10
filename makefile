@@ -14,4 +14,7 @@ build:
 
 	@cat $(SRC) > $(DEV)
 
+publish:
+	npm publish
+
 .PHONY: setup test build
