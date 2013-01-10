@@ -69,5 +69,21 @@ describe('Cryo - Browser', function() {
     assert.isArray(hydrated);
     assert.strictEqual(hydrated.length, 3);
     assert.strictEqual(hydrated[2], 3);
+    assert.isUndefined(hydrated.ref);
+  });
+
+  it('should ignore DOM references on dates', function() {
+    var ref = document.getElementById('ref-test');
+    var original = new Date();
+    original.attached = 'some property';
+    original.ref = ref;
+
+    var stringified = Cryo.stringify(original);
+    var hydrated = Cryo.parse(stringified);
+
+    assert.typeOf(hydrated, 'date');
+    assert.strictEqual(hydrated.getTime(), original.getTime());
+    assert.strictEqual(hydrated.attached, original.attached);
+    assert.isUndefined(hydrated.ref);
   });
 });
