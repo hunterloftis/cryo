@@ -44,7 +44,7 @@ describe('Cryo - Browser', function() {
     assert.strictEqual(test.subject.title, hydrated.subject.title);
   });
 
-  it('should ignore DOM references', function() {
+  it('should ignore DOM references in objects', function() {
     var ref = document.getElementById('ref-test');
     var test = {
       domRef: ref,
@@ -58,4 +58,16 @@ describe('Cryo - Browser', function() {
     assert.strictEqual(hydrated.otherData, test.otherData);
   });
 
+  it('should ignore DOM references in arrays', function() {
+    var ref = document.getElementById('ref-test');
+    var test = [ref, ref, 3, ref];
+
+    var stringified = Cryo.stringify(test);
+    var hydrated = Cryo.parse(stringified);
+
+    assert.ok(ref);
+    assert.isArray(hydrated);
+    assert.strictEqual(hydrated.length, 3);
+    assert.strictEqual(hydrated[2], 3);
+  });
 });

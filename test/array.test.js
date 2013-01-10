@@ -10,6 +10,7 @@ describe('Array', function() {
     var stringified = Cryo.stringify(original);
     var hydrated = Cryo.parse(stringified);
 
+    assert.isArray(hydrated);
     assert.deepEqual(hydrated, original);
   });
 
@@ -22,6 +23,7 @@ describe('Array', function() {
     var stringified = Cryo.stringify(original);
     var hydrated = Cryo.parse(stringified);
 
+    assert.isArray(hydrated);
     assert.deepEqual(hydrated, original);
   });
 
@@ -31,7 +33,11 @@ describe('Array', function() {
     var stringified = Cryo.stringify(original);
     var hydrated = Cryo.parse(stringified);
 
-    assert.deepEqual(hydrated, original);
+    assert.isArray(hydrated);
+    assert.strictEqual(hydrated.length, original.length);
+    assert.strictEqual(hydrated[0], original[0]);
+    assert.strictEqual(hydrated[2], original[2]);
+    assert.strictEqual(hydrated.attached, original.attached);
   });
 
 });
