@@ -86,4 +86,14 @@ describe('Cryo - Browser', function() {
     assert.strictEqual(hydrated.attached, original.attached);
     assert.isUndefined(hydrated.ref);
   });
+
+  it('should ignore a direct DOM reference', function() {
+    var test = document.getElementById('ref-test');
+
+    var stringified = Cryo.stringify(test);
+    var hydrated = Cryo.parse(stringified);
+
+    assert.ok(test);
+    assert.isUndefined(hydrated);
+  });
 });

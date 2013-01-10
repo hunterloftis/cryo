@@ -11,6 +11,7 @@ Cryo.stringify() and Cryo.parse() improve on JSON in these circumstances:
 - [Object references](#references)
 - [Attached properties](#properties)
 - [Functions](#functions)
+- [DOM Nodes](#dom)
 
 ## Installation
 
@@ -175,6 +176,28 @@ try {
 
 var withCryo = Cryo.parse(Cryo.stringify(fn));
 withCryo();                                         // Hello, world!
+```
+
+### DOM
+
+JSON chokes when you try to stringify an object with a reference to a DOM node, giving `Uncaught TypeError: Converting circular structure to JSON.`
+Cryo will ignore DOM nodes so you can serialize such objects without hassle.
+
+```js
+var obj = {
+  button: document.getElementById('my-button');
+  message: 'Hello'
+};
+
+try {
+  var withJSON = JSON.parse(JSON.stringify(obj));
+  console.log(withJSON.message === 'Hello');
+} catch(e) {
+  console.log('error');                             // error
+}
+
+var withCryo = Cryo.parse(Cryo.stringify(obj));
+console.log(withCryo.message === 'Hello');          // true
 ```
 
 ## Tests
