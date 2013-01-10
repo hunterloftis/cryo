@@ -1,4 +1,4 @@
-VERSION=0.0.4
+VERSION=0.0.5
 SRC=lib/cryo.js
 DEV=build/cryo-$(VERSION).js
 
