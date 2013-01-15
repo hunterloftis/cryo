@@ -200,6 +200,37 @@ var withCryo = Cryo.parse(Cryo.stringify(obj));
 console.log(withCryo.message === 'Hello');          // true
 ```
 
+## Stringified Output
+
+`Cryo.stringify()` returns valid JSON data with non-compatible types encoded as strings.
+Thus, anything you can do with JSON, you can do with Cryo.
+
+Here is the stringified result from the hello, world example:
+
+```json
+{
+  "root":"_CRYO_REF_2",
+  "references":[
+    {
+      "contents": {},
+      "value":"_CRYO_DATE_1358245390835"
+    },
+    {
+      "contents": {},
+      "value":"_CRYO_FUNCTION_function () {\n    console.log(this.name + ' said hello in ' + this.created.getFullYear() + '!');\n  }"
+    },
+    {
+      "contents":{
+        "name":"Hunter",
+        "created":"_CRYO_REF_0",
+        "hello":"_CRYO_REF_1"
+      },
+      "value":"_CRYO_OBJECT_"
+    }
+  ]
+}
+```
+
 ## Tests
 
 Tests require node.js.
