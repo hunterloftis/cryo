@@ -1,0 +1,11 @@
+{
+    "name": "cryo",
+    "version": "0.0.5",
+    "main": "lib/cryo.js",
+    "ignore": [
+        "build/",
+        "examples/",
+        "test/",
+        "vendor/"
+    ]
+}
