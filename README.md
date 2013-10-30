@@ -23,6 +23,12 @@ $ npm install cryo
 
 ### browser
 
+With Bower:
+
+```
+bower install cryo
+```
+
 Add the [latest minified build](https://github.com/hunterloftis/cryo/tree/master/build) to your project as a script:
 
 ```html
