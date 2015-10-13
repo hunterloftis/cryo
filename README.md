@@ -39,8 +39,8 @@ Add the [latest minified build](https://github.com/hunterloftis/cryo/tree/master
 
 Cryo has a very simple API that mimicks JSON:
 
-- `Cryo.stringify(item)`
-- `Cryo.parse(string)`
+- `Cryo.stringify(item, [callback])`
+- `Cryo.parse(string, [callback])`
 
 ```js
 var Cryo = require('cryo');
@@ -182,6 +182,35 @@ try {
 
 var withCryo = Cryo.parse(Cryo.stringify(fn));
 withCryo();                                         // Hello, world!
+```
+
+### Custom Types
+
+Cryo can allow you to stringify and parse custom types by using the optional callback argument. The callback for `stringify` is called before each item is stringified, allowing you to alter an object just before it's serialized. The callback for `parse` is called after each item is re-created, allowing you to alter an object just after it's de-serialized:
+
+```js
+function Person() {}
+var person = new Person();
+person.friends = [new Person()];
+
+var stringified = Cryo.stringify(person, function(obj) {
+  // store any object's constructor name under a variable called
+  // __class__ which can later be be used to restore the object's
+  // prototype.
+  obj.__class__ = obj.constructor.name;
+});
+var parsed = Cryo.parse(stringified, function(obj) {
+  // look for objects that define a __class__ and restore their
+  // prototype by finding the class on the global window (you may need
+  // to look elsewhere for the class).
+  if (obj.__class__ && window[obj.__class__]) {
+    obj.__proto__ = window[obj.__class__].prototype;
+    delete obj.__class__;
+  }
+});
+
+parsed instanceof Person; // true
+parsed.friends[0] instanceof Person; // true
 ```
 
 ### DOM

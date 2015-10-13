@@ -96,4 +96,28 @@ describe('Cryo - Browser', function() {
     assert.ok(test);
     assert.isUndefined(hydrated);
   });
+
+  it('should be able to use callbacks to hydrate objects with types', function() {
+    function CustomType() {}
+    var test = new CustomType();
+    test.sub = [new CustomType()];
+
+    var types = {
+      'CustomType': CustomType
+    };
+    var stringified = Cryo.stringify(test, function(obj) {
+      if (types[obj.constructor.name]) {
+        obj.__class__ = obj.constructor.name;
+      }
+    });
+    var hydrated = Cryo.parse(stringified, function(obj) {
+      if (types[obj.__class__]) {
+        obj.__proto__ = types[obj.__class__].prototype;
+        delete obj.__class__;
+      }
+    });
+
+    assert.strictEqual(hydrated.constructor.name, 'CustomType');
+    assert.strictEqual(hydrated.sub[0].constructor.name, 'CustomType');
+  });
 });
