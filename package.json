@@ -20,7 +20,7 @@
     "node": ">= 0.4.x"
   },
   "devDependencies": {
-    "mocha": "~1.7.4",
-    "chai": "~1.4.2"
+    "chai": "~1.4.2",
+    "mocha": "~1.7.4"
   }
 }
