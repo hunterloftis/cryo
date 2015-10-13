@@ -1,6 +1,6 @@
 {
   "name": "cryo",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Easily pickle/serialize/freeze/store and re-hydrate complex JavaScript objects (including Functions)",
   "keywords": [
     "pickle",
