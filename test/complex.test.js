@@ -84,4 +84,21 @@ describe('Complex', function() {
     assert.strictEqual(hydrated.constructor.name, 'CustomType');
     assert.strictEqual(hydrated.sub[0].constructor.name, 'CustomType');
   });
+
+  it('should hydrate object graphs with cycles', function() {
+    function Cycle() {}
+
+    var c1 = new Cycle();
+    var c2 = new Cycle();
+
+    c1.c = c2;
+    c2.c = c1;
+
+    var original = { c1: c1, c2: c2 };
+
+    var stringified = Cryo.stringify(original);
+    var hydrated = Cryo.parse(stringified);
+
+    // A passing test is one that doesn't explode the stack.  No asserts necessary
+  });
 });
