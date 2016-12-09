@@ -31,4 +31,14 @@ describe('Function', function() {
     assert.strictEqual(hydrated.attached, original.attached);
   });
 
+  it('can hydrate a minified function body', function() {
+    var original = function(val) {return String(val)};
+    var stringified = Cryo.stringify(original);
+    var hydrated = Cryo.parse(stringified);
+
+    var result1 = original('Hunter');
+    var result2 = hydrated('Hunter');
+    assert.deepEqual(result1, result2);
+  });
+
 });
