@@ -41,7 +41,7 @@ describe('Complex', function() {
     assert.strictEqual(test.subject.title, hydrated.subject.title);
   });
 
-  it('should dereference objects that were originall the same into the same after hydration', function() {
+  it('should dereference objects that were originally the same into the same after hydration', function() {
     var userList = [{ name: 'Abe' }, { name: 'Bob' }, { name: 'Carl' }];
     var state = {
       users: userList,
@@ -100,5 +100,34 @@ describe('Complex', function() {
     var hydrated = Cryo.parse(stringified);
 
     // A passing test is one that doesn't explode the stack.  No asserts necessary
+  });
+
+  it('should be able to determine custom cloneable objects', function() {
+    function Parent() {}
+    Parent.prototype.__class__ = 'Parent';
+
+    function Child() {}
+    Child.prototype = Parent;
+    Child.prototype.constructor = Child;
+    Child.prototype.__class__ = 'Child';
+
+    var original = new Child();
+
+    var stringified = Cryo.stringify(original, {
+      isSerializable: function(item, key) {
+        return item.hasOwnProperty(key) || key === '__class__';
+      }
+    });
+    var hydrated = Cryo.parse(stringified, {
+      finalize: function(item) {
+        if (item.__class__ === 'Child') {
+          item.__proto__ = Child.prototype;
+        }
+      }
+    });
+
+    assert.strictEqual(original.prototype, hydrated.prototype);
+    assert.strictEqual(original.__class__, hydrated.__class__);
+    assert.strictEqual(hydrated.__class__, Child.prototype.__class__);
   });
 });
